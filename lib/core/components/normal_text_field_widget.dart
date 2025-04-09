@@ -5,11 +5,15 @@ class NormalTextFieldWidget extends StatelessWidget {
   final String text;
   final TextInputType? textType;
   final Widget? prefixIcon;
+  final double contentPadding;
+  final bool isDense;
   const NormalTextFieldWidget({
     super.key,
     required this.text,
     this.textType = TextInputType.name,
     this.prefixIcon,
+    this.contentPadding = 16,
+    this.isDense = true,
   });
 
   @override
@@ -18,9 +22,11 @@ class NormalTextFieldWidget extends StatelessWidget {
       keyboardType: textType,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
+        contentPadding: EdgeInsets.all(contentPadding),
         hintText: text,
-        hintTextDirection: TextDirection.rtl,
+        isDense: isDense,
         enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: AppColors.border),
         ),
         border: OutlineInputBorder(

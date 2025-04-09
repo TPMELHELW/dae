@@ -1,8 +1,6 @@
 import 'package:dae/core/components/normal_text_field_widget.dart';
 import 'package:dae/core/components/password_text_field_widget.dart';
-import 'package:dae/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class FormLoginWidget extends StatelessWidget {
   const FormLoginWidget({super.key});

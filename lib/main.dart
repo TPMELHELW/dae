@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       locale: Locale('ar'),
       getPages: AppPages.appPages,
       themeMode: ThemeMode.light,

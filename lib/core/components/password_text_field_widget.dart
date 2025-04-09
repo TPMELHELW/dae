@@ -37,6 +37,8 @@ class PasswordTextFieldWidget extends StatelessWidget {
         hintText: 'كلمة السر',
         hintTextDirection: TextDirection.rtl,
         enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+
           borderSide: BorderSide(color: AppColors.border),
         ),
         border: OutlineInputBorder(
