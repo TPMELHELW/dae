@@ -1,7 +1,9 @@
 import 'package:dae/core/components/button_widget.dart';
+import 'package:dae/core/routes/app_routes.dart';
 import 'package:dae/features/authentication/screens/login_screen/widgets/form_login_widget.dart';
 import 'package:dae/features/authentication/screens/login_screen/widgets/no_account_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -33,7 +35,10 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 50),
               const FormLoginWidget(),
               SizedBox(height: MediaQuery.of(context).size.height * 0.25),
-              const ButtonWidget(text: 'تسجيل دخول'),
+              ButtonWidget(
+                text: 'تسجيل دخول',
+                onPress: () => Get.toNamed(AppRoutes.home),
+              ),
               const SizedBox(height: 10),
               const NoAccountWidget(),
             ],

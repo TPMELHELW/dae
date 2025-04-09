@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class LessonLearnedWidget extends StatelessWidget {
-  const LessonLearnedWidget({super.key});
+  final bool isDaea;
+  const LessonLearnedWidget({super.key, required this.isDaea});
 
   @override
   Widget build(BuildContext context) {
@@ -12,37 +13,86 @@ class LessonLearnedWidget extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       itemCount: 5,
       itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.all(10),
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppColors.grey),
+        return ListTile(
+          tileColor: Colors.black,
+          shape: Border.all(color: Colors.black, width: 1.0),
+          visualDensity: VisualDensity(vertical: -2), // Adjusts spacing
+          leading: Icon(Iconsax.book),
+          title: Text(
+            'حلين يدرس في شريع',
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge!.copyWith(color: AppColors.kPrimaryColor),
           ),
-          child: Row(
-            children: [
-              Icon(Iconsax.book),
-              SizedBox(width: 15),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'حلين يدرس في شريع',
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: AppColors.kPrimaryColor,
+          subtitle: Text(
+            'اخر تحديث : 2025/2/23',
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          trailing:
+              isDaea
+                  ? SizedBox(
+                    width: 96,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Iconsax.edit, size: 18),
+                          iconSize: 18,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Iconsax.note_remove, size: 18),
+                          iconSize: 18,
+                        ),
+                      ],
                     ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    'اخر تحديث : 2025/2/23',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                ],
-              ),
-            ],
-          ),
+                  )
+                  : null,
         );
       },
     );
   }
 }
+
+
+
+// Container(
+//           margin: EdgeInsets.all(10),
+//           padding: EdgeInsets.all(10),
+//           decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(10),
+//             border: Border.all(color: AppColors.grey),
+//           ),
+//           child: Row(
+//             children: [
+//               Icon(Iconsax.book),
+//               SizedBox(width: 15),
+//               Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text(
+//                     'حلين يدرس في شريع',
+//                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
+//                       color: AppColors.kPrimaryColor,
+//                     ),
+//                   ),
+//                   SizedBox(height: 5),
+//                   Text(
+//                     'اخر تحديث : 2025/2/23',
+//                     style: Theme.of(context).textTheme.titleSmall,
+//                   ),
+//                 ],
+//               ),
+//               IconButton(
+//                 onPressed: () {},
+//                 icon: Icon(Iconsax.edit, size: 18),
+//                 iconSize: 18,
+//               ),
+//               IconButton(
+//                 onPressed: () {},
+//                 icon: Icon(Iconsax.note_remove, size: 18),
+//                 iconSize: 18,
+//               ),
+//             ],
+//           ),
+//         );

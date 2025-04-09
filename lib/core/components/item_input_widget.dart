@@ -16,6 +16,8 @@ class ItemInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
+        // mainAxisAlignment: MainAxis,
         spacing: 7,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

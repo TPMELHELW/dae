@@ -1,7 +1,7 @@
 import 'package:dae/core/components/button_widget.dart';
 import 'package:dae/core/components/normal_text_field_widget.dart';
 import 'package:dae/core/constants/app_colors.dart';
-import 'package:dae/features/home_screen/screens/widgets/item_input_widget.dart';
+import 'package:dae/core/components/item_input_widget.dart';
 import 'package:dae/features/home_screen/screens/widgets/normal_input_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +20,7 @@ class DaeahWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         spacing: 10,
         children: [
           !isEdit

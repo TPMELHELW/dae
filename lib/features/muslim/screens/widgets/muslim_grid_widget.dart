@@ -1,8 +1,10 @@
 import 'package:dae/core/components/button_widget.dart';
 import 'package:dae/core/components/custom_divider_widget.dart';
 import 'package:dae/core/constants/app_colors.dart';
+import 'package:dae/core/routes/app_routes.dart';
 import 'package:dae/features/muslim/screens/widgets/active_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class MuslimGridWidget extends StatelessWidget {
@@ -63,7 +65,11 @@ class MuslimGridWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              ButtonWidget(text: 'عرض الحساب'),
+              ButtonWidget(
+                text: 'عرض الحساب',
+                onPress:
+                    () => Get.toNamed(AppRoutes.showAccount, arguments: true),
+              ),
             ],
           ),
         );

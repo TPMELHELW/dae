@@ -24,7 +24,12 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.showAccount,
-      page: () => const ShowAccountScreen(),
+      // arguments: ,
+      page: () {
+        final args = Get.arguments as bool;
+        return ShowAccountScreen(isDaea: args);
+      },
+
       transition: Transition.cupertino,
     ),
   ];

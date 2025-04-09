@@ -3,10 +3,13 @@ import 'package:dae/core/components/custom_divider_widget.dart';
 import 'package:dae/core/constants/app_colors.dart';
 import 'package:dae/features/muslim/screens/widgets/active_widget.dart';
 import 'package:dae/features/muslim/screens/widgets/lesson_learned_widget.dart';
+import 'package:dae/features/muslim/screens/widgets/show_add_progress_dialog.dart';
+import 'package:dae/features/muslim/screens/widgets/show_edit_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ShowAccountScreen extends StatelessWidget {
-  const ShowAccountScreen({super.key});
+  final bool isDaea;
+  const ShowAccountScreen({super.key, this.isDaea = true});
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +54,18 @@ class ShowAccountScreen extends StatelessWidget {
                     ActiveWidget(),
                   ],
                 ),
-                LessonLearnedWidget(),
-                ButtonWidget(text: 'تعديل الحساب'),
+                LessonLearnedWidget(isDaea: isDaea),
+                ButtonWidget(
+                  text: 'تعديل الحساب',
+                  onPress: () => showEditDialog(),
+                ),
+                SizedBox(height: 15),
+                isDaea
+                    ? ButtonWidget(
+                      text: 'اضافة تقدم',
+                      onPress: () => showAddProgressDialog(),
+                    )
+                    : SizedBox(),
               ],
             ),
           ),

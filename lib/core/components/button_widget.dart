@@ -1,12 +1,10 @@
 import 'package:dae/core/constants/app_colors.dart';
-import 'package:dae/core/routes/app_routes.dart';
-import 'package:dae/features/muslim/screens/widgets/show_edit_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ButtonWidget extends StatelessWidget {
+  final void Function()? onPress;
   final String text;
-  const ButtonWidget({super.key, required this.text});
+  const ButtonWidget({super.key, required this.text, this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +14,7 @@ class ButtonWidget extends StatelessWidget {
         backgroundColor: AppColors.kPrimaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
-      onPressed: () => Get.toNamed(AppRoutes.home),
+      onPressed: onPress,
       child: Text(
         text,
         style: Theme.of(
