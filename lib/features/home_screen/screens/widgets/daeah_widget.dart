@@ -6,7 +6,8 @@ import 'package:dae/features/home_screen/screens/widgets/normal_input_widget.dar
 import 'package:flutter/material.dart';
 
 class DaeahWidget extends StatelessWidget {
-  const DaeahWidget({super.key});
+  final bool isEdit;
+  const DaeahWidget({super.key, this.isEdit = false});
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +22,25 @@ class DaeahWidget extends StatelessWidget {
       child: Column(
         spacing: 10,
         children: [
-          Row(
-            children: [
-              SizedBox(
-                height: 25,
-                child: VerticalDivider(
-                  thickness: 2,
-                  color: AppColors.kPrimaryColor,
-                ),
-              ),
-              Text(
-                'ادخل مسلم',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge!.copyWith(fontSize: 18),
-              ),
-            ],
-          ),
-          // SizedBox(height: 10),
+          !isEdit
+              ? Row(
+                children: [
+                  SizedBox(
+                    height: 25,
+                    child: VerticalDivider(
+                      thickness: 2,
+                      color: AppColors.kPrimaryColor,
+                    ),
+                  ),
+                  Text(
+                    'ادخل مسلم',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleLarge!.copyWith(fontSize: 18),
+                  ),
+                ],
+              )
+              : SizedBox(),
           Row(
             spacing: 7,
             children: [
@@ -106,7 +108,7 @@ class DaeahWidget extends StatelessWidget {
               ),
               ItemInputWidget(
                 text: 'نوع المسلم',
-                items: ["مسلم عادي", "محب للعبم"],
+                items: ["مسلم عادي", "محب للعلم"],
                 value: 'مسلم عادي',
               ),
             ],

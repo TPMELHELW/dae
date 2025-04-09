@@ -28,6 +28,7 @@ class NavigationMenuScreen extends StatelessWidget {
         ),
       ),
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background.png'),

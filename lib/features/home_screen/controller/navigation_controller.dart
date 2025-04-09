@@ -1,4 +1,5 @@
 import 'package:dae/features/home_screen/screens/home_screen.dart';
+import 'package:dae/features/muslim/screens/muslim_screen.dart';
 import 'package:get/get.dart';
 
 class NavigationBarController extends GetxController {
@@ -10,8 +11,8 @@ class NavigationBarController extends GetxController {
 
   final List screens = [
     const HomeScreen(),
+    MuslimScreen(),
     HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
+    // HomeScreen(),
   ];
 }

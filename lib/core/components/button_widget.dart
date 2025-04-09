@@ -1,5 +1,6 @@
 import 'package:dae/core/constants/app_colors.dart';
 import 'package:dae/core/routes/app_routes.dart';
+import 'package:dae/features/muslim/screens/widgets/show_edit_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

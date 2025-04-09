@@ -1,4 +1,4 @@
-import 'package:dae/features/home_screen/screens/widgets/daeah_widget.dart';
+import 'package:dae/features/home_screen/screens/widgets/moalem_widget.dart';
 import 'package:dae/features/home_screen/screens/widgets/prayer_time_widget.dart';
 import 'package:dae/features/home_screen/screens/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
           PrayerTimeWidget(),
           SizedBox(height: 20),
           SearchWidget(),
-          DaeahWidget(),
+          MoalemWidget(),
         ],
       ),
     );
