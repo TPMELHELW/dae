@@ -9,7 +9,7 @@ class NavigationMenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NavigationBarController controller = Get.put(NavigationBarController());
+    final NavigationController controller = Get.put(NavigationController());
     return Scaffold(
       appBar: HomeAppBarWidget(),
       bottomNavigationBar: Obx(

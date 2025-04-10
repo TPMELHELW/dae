@@ -48,7 +48,7 @@ showAddProgressDialog() {
               ),
 
               // SizedBox(height: 20),
-              Row(children: [NormalInputWidget(text: 'اسم الدرس')]),
+              /// Row(children: [NormalInputWidget(text: 'اسم الدرس')]),
               ButtonWidget(text: 'حفظ'),
               // SizedBox(height: 20),
             ],

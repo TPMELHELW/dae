@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1094310517305",
+    "project_id": "elhelw-2-30721",
+    "storage_bucket": "elhelw-2-30721.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094310517305:android:50dae4a0354379eb330be8",
+        "android_client_info": {
+          "package_name": "com.example.dae"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094310517305-iln9v92guk003eo1a30ot7tvgpv1v11d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa0uQKpGo_uHygTirbR70ouDXtADrj_r4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094310517305-iln9v92guk003eo1a30ot7tvgpv1v11d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

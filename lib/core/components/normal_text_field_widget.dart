@@ -7,6 +7,8 @@ class NormalTextFieldWidget extends StatelessWidget {
   final Widget? prefixIcon;
   final double contentPadding;
   final bool isDense;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
   const NormalTextFieldWidget({
     super.key,
     required this.text,
@@ -14,11 +16,15 @@ class NormalTextFieldWidget extends StatelessWidget {
     this.prefixIcon,
     this.contentPadding = 16,
     this.isDense = true,
+    this.controller,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
+      controller: controller,
       keyboardType: textType,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,

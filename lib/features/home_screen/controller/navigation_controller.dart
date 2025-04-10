@@ -1,18 +1,52 @@
+import 'dart:convert';
+
+import 'package:dae/core/constants/app_enum.dart';
+import 'package:dae/core/services/shared_preferences_services.dart';
+import 'package:dae/features/authentication/models/user_model.dart';
 import 'package:dae/features/home_screen/screens/home_screen.dart';
 import 'package:dae/features/muslim/screens/muslim_screen.dart';
+import 'package:dae/features/settings/screens/account_settings_screen.dart';
 import 'package:get/get.dart';
 
-class NavigationBarController extends GetxController {
-  final Rx<int> currentIndex = 0.obs;
+class NavigationController extends GetxController {
+  static NavigationController get instance => Get.find<NavigationController>();
 
-  void onSelect(index) {
+  final Rx<int> currentIndex = 0.obs;
+  late Rx<StatusRequest> statusRequest;
+  final Rx<UserModel?> userData = Rx<UserModel?>(null);
+  final SharedPreferencesService _prefsService =
+      Get.find<SharedPreferencesService>();
+
+  final List screens = const [
+    HomeScreen(),
+    MuslimScreen(),
+    AccountSettingsScreen(),
+  ];
+
+  void onSelect(int index) {
     currentIndex.value = index;
   }
 
-  final List screens = [
-    const HomeScreen(),
-    MuslimScreen(),
-    HomeScreen(),
-    // HomeScreen(),
-  ];
+  Future<void> loadUserData() async {
+    try {
+      statusRequest.value = StatusRequest.loading;
+      final userString = await _prefsService.getString('UserData');
+      if (userString != null) {
+        userData.value = UserModel.fromStorage(await json.decode(userString));
+        statusRequest.value = StatusRequest.success;
+      }
+    } catch (e) {
+      statusRequest.value = StatusRequest.notValidate;
+
+      Get.snackbar('Error', 'Failed to load user data');
+      print('Error loading user data: $e');
+    }
+  }
+
+  @override
+  void onInit() async {
+    statusRequest = StatusRequest.init.obs;
+    await loadUserData();
+    super.onInit();
+  }
 }

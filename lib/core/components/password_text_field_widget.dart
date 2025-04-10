@@ -1,13 +1,17 @@
 import 'package:dae/core/constants/app_colors.dart';
+import 'package:dae/core/validation/input_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class PasswordTextFieldWidget extends StatelessWidget {
-  const PasswordTextFieldWidget({super.key});
+  final TextEditingController? controller;
+  const PasswordTextFieldWidget({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: (value) => AppFieldValidator.validatePassword(value),
+      controller: controller,
       decoration: InputDecoration(
         suffixIcon: SizedBox(
           width: 112,

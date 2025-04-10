@@ -2,6 +2,8 @@ import 'package:dae/core/components/button_widget.dart';
 import 'package:dae/core/components/normal_text_field_widget.dart';
 import 'package:dae/core/constants/app_colors.dart';
 import 'package:dae/core/components/item_input_widget.dart';
+import 'package:dae/core/validation/input_validation.dart';
+import 'package:dae/features/home_screen/controller/home_controller.dart';
 import 'package:dae/features/home_screen/screens/widgets/normal_input_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,7 @@ class DaeahWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeController controller = HomeController.instance;
     return Container(
       margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.all(15),
@@ -19,105 +22,160 @@ class DaeahWidget extends StatelessWidget {
 
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        spacing: 10,
-        children: [
-          !isEdit
-              ? Row(
-                children: [
-                  SizedBox(
-                    height: 25,
-                    child: VerticalDivider(
-                      thickness: 2,
-                      color: AppColors.kPrimaryColor,
+      child: Form(
+        key: controller.formState,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 10,
+          children: [
+            !isEdit
+                ? Row(
+                  children: [
+                    SizedBox(
+                      height: 25,
+                      child: VerticalDivider(
+                        thickness: 2,
+                        color: AppColors.kPrimaryColor,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'ادخل مسلم',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleLarge!.copyWith(fontSize: 18),
-                  ),
-                ],
-              )
-              : SizedBox(),
-          Row(
-            spacing: 7,
-            children: [
-              ItemInputWidget(
-                text: 'الجنس',
-                items: ['ّذكر', 'أنثي'],
-                value: 'أنثي',
-              ),
-              ItemInputWidget(
-                text: 'الدول',
-                items: ["مصر", "تركيا"],
-                value: 'مصر',
-              ),
-            ],
-          ),
-          Row(
-            spacing: 7,
-            children: [
-              NormalInputWidget(text: 'الاسم'),
-              NormalInputWidget(text: 'السن', textType: TextInputType.number),
+                    Text(
+                      'ادخل مسلم',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleLarge!.copyWith(fontSize: 18),
+                    ),
+                  ],
+                )
+                : SizedBox(),
+            Row(
+              spacing: 7,
+              children: [
+                ItemInputWidget(
+                  text: 'الجنس',
+                  items: controller.genderItems,
+                  value: controller.gender,
+                  onChange: (value) {
+                    controller.gender = value!;
+                  },
+                ),
+                ItemInputWidget(
+                  text: 'الدول',
+                  items: controller.countryItems,
+                  value: controller.country,
+                  onChange: (value) {
+                    controller.country = value!;
+                  },
+                ),
+              ],
+            ),
+            Row(
+              spacing: 7,
+              children: [
+                NormalInputWidget(
+                  text: 'الاسم',
+                  controller: controller.name,
+                  validator:
+                      (value) => AppFieldValidator.validateEmpty(value, 'Name'),
+                ),
+                NormalInputWidget(
+                  text: 'السن',
+                  textType: TextInputType.number,
+                  validator:
+                      (value) => AppFieldValidator.validateEmpty(value, 'Age'),
 
-              ItemInputWidget(
-                text: 'الفتره',
-                items: ["شهر", "اقل من شهر"],
-                value: 'شهر',
-              ),
-            ],
-          ),
-          Row(
-            spacing: 7,
-            children: [
-              NormalInputWidget(text: 'الرقم', textType: TextInputType.number),
-              NormalInputWidget(
-                text: 'الايميل',
-                textType: TextInputType.emailAddress,
-              ),
-            ],
-          ),
-          Row(
-            spacing: 7,
-            children: [
-              NormalInputWidget(
-                text: 'اللغه الاساسيه',
-                textType: TextInputType.number,
-              ),
-              ItemInputWidget(
-                text: 'وسيلة الدعوة',
-                items: ['دعوة ذاتية', 'Islam Port', 'Islam Connect'],
-                value: 'دعوة ذاتية',
-              ),
-              ItemInputWidget(
-                text: 'Page',
-                items: ['Page 1', 'Page 2'],
-                value: 'Page 1',
-              ),
-            ],
-          ),
-          Row(
-            spacing: 7,
-            children: [
-              ItemInputWidget(
-                text: 'الدين السابق',
-                items: ['يهودي', 'مسيحي', "ملحد", "غيره"],
-                value: 'مسيحي',
-              ),
-              ItemInputWidget(
-                text: 'نوع المسلم',
-                items: ["مسلم عادي", "محب للعلم"],
-                value: 'مسلم عادي',
-              ),
-            ],
-          ),
-          Text('نبد عنه و ملاحظات', textAlign: TextAlign.right),
-          NormalTextFieldWidget(text: 'اكتب نبد عنه المسلم.....'),
-          ButtonWidget(text: 'إدخال'),
-        ],
+                  controller: controller.age,
+                ),
+
+                ItemInputWidget(
+                  text: 'الفتره',
+                  items: controller.periodItems,
+                  value: controller.period,
+                  onChange: (value) {
+                    controller.period = value!;
+                  },
+                ),
+              ],
+            ),
+            Row(
+              spacing: 7,
+              children: [
+                NormalInputWidget(
+                  validator:
+                      (value) =>
+                          AppFieldValidator.validateEmpty(value, 'Number'),
+                  text: 'الرقم',
+                  textType: TextInputType.number,
+                  controller: controller.number,
+                ),
+                NormalInputWidget(
+                  validator: (value) => AppFieldValidator.validateEmail(value),
+
+                  text: 'الايميل',
+                  textType: TextInputType.emailAddress,
+                  controller: controller.email,
+                ),
+              ],
+            ),
+            Row(
+              spacing: 7,
+              children: [
+                NormalInputWidget(
+                  text: 'اللغه الاساسيه',
+                  controller: controller.primaryLang,
+                  validator:
+                      (value) => AppFieldValidator.validateEmpty(
+                        value,
+                        'Primary Language',
+                      ),
+                ),
+                ItemInputWidget(
+                  text: 'وسيلة الدعوة',
+                  items: controller.wayItems,
+                  value: controller.way,
+                  onChange: (value) {
+                    controller.way = value!;
+                  },
+                ),
+                ItemInputWidget(
+                  text: 'Page',
+                  items: ['Page 1', 'Page 2'],
+                  value: 'Page 1',
+                ),
+              ],
+            ),
+            Row(
+              spacing: 7,
+              children: [
+                ItemInputWidget(
+                  text: 'الدين السابق',
+                  items: controller.previousReligionItems,
+                  value: controller.previousReligion,
+                  onChange: (value) {
+                    controller.previousReligion = value!;
+                  },
+                ),
+                ItemInputWidget(
+                  text: 'نوع المسلم',
+                  items: controller.typeOfMuslimItems,
+                  value: controller.typeOfMuslim,
+                  onChange: (value) {
+                    controller.typeOfMuslim = value!;
+                  },
+                ),
+              ],
+            ),
+            Text('نبد عنه و ملاحظات', textAlign: TextAlign.right),
+            NormalTextFieldWidget(
+              text: 'اكتب نبد عنه المسلم.....',
+              controller: controller.notes,
+            ),
+            ButtonWidget(
+              text: 'إدخال',
+              statusRequest: controller.statusRequest,
+              onPress: () async => await controller.enterNewMuslim(),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -5,11 +5,13 @@ class DropdownFieldWidget extends StatelessWidget {
   final double contentPadding;
   final List<String> items;
   final String value;
+  final void Function(String?)? onChange;
   const DropdownFieldWidget({
     super.key,
     required this.contentPadding,
     required this.items,
     required this.value,
+    this.onChange,
   });
 
   @override
@@ -32,8 +34,7 @@ class DropdownFieldWidget extends StatelessWidget {
           borderSide: BorderSide(color: AppColors.border),
         ),
       ),
-      // style: TextStyle(fontSize: 14),
-      // iconSize: 20,
+
       value: value,
       items:
           items
@@ -44,7 +45,7 @@ class DropdownFieldWidget extends StatelessWidget {
                 ),
               )
               .toList(),
-      onChanged: (value) {},
+      onChanged: onChange,
     );
   }
 }
