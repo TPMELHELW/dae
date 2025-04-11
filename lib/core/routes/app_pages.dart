@@ -26,8 +26,12 @@ class AppPages {
       name: AppRoutes.showAccount,
       // arguments: ,
       page: () {
-        final args = Get.arguments as bool;
-        return ShowAccountScreen(isDaea: args);
+        final args = Get.arguments as Map;
+        return ShowAccountScreen(
+          isDaea: args['isDaea'],
+          muslimData: args['muslimData'],
+          index: args['index'],
+        );
       },
 
       transition: Transition.cupertino,

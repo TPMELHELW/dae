@@ -55,7 +55,7 @@ class MoalemWidget extends StatelessWidget {
               ),
               SizedBox(height: 15),
 
-              ActiveWidget(text: 'غير متابع'),
+              // ActiveWidget(text: 'غير متابع'),
               SizedBox(height: 15),
               ButtonWidget(text: 'اضافة المسلم'),
             ],

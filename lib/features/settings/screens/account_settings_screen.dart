@@ -31,7 +31,7 @@ class AccountSettingsScreen extends StatelessWidget {
                     'محمد محسن',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  ActiveWidget(),
+                  // ActiveWidget(),
                 ],
               ),
               ButtonWidget(text: 'تعديل الحساب'),

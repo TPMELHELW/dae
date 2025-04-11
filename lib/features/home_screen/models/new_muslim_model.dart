@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dae/features/muslim/models/lessons_model.dart';
 
 class NewMuslimModel {
+  final String? id;
   final String? daeaId;
   final String gender;
   final String country;
@@ -13,8 +15,15 @@ class NewMuslimModel {
   final String way;
   final String previousReligion;
   final String typeOfMuslim;
+  final bool active;
+  final String lastUpdate;
+  final List<LessonsModel> lessons;
 
   NewMuslimModel({
+    this.id,
+    this.active = false,
+    required this.lastUpdate,
+    required this.lessons,
     this.daeaId,
     required this.gender,
     required this.country,
@@ -33,6 +42,9 @@ class NewMuslimModel {
     return {
       'DaeaId': daeaId,
       'Gender': gender,
+      'LastUpdate': lastUpdate,
+      'Lessons': lessons,
+      'Active': active,
       'Country': country,
       'Name': name,
       'Age': age,
@@ -50,7 +62,7 @@ class NewMuslimModel {
     DocumentSnapshot<Map<String, dynamic>> document,
   ) {
     final data = document.data()!;
-
+    final lesson = data['Lessons'] as List;
     return NewMuslimModel(
       daeaId: data['DaeaId'],
       gender: data['Gender'],
@@ -64,6 +76,9 @@ class NewMuslimModel {
       way: data['Way'],
       previousReligion: data['PreviousReligion'],
       typeOfMuslim: data['TypeOfMuslim'],
+      lastUpdate: data['LastUpdate'],
+      lessons: lesson.map((item) => LessonsModel.fromSnapshot(item)).toList(),
+      id: document.id,
     );
   }
 }

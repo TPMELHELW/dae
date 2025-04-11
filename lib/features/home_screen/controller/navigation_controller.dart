@@ -6,6 +6,7 @@ import 'package:dae/features/authentication/models/user_model.dart';
 import 'package:dae/features/home_screen/screens/home_screen.dart';
 import 'package:dae/features/muslim/screens/muslim_screen.dart';
 import 'package:dae/features/settings/screens/account_settings_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NavigationController extends GetxController {
@@ -17,7 +18,7 @@ class NavigationController extends GetxController {
   final SharedPreferencesService _prefsService =
       Get.find<SharedPreferencesService>();
 
-  final List screens = const [
+  final List<Widget> screens = const [
     HomeScreen(),
     MuslimScreen(),
     AccountSettingsScreen(),

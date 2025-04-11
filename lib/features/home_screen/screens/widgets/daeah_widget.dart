@@ -4,16 +4,18 @@ import 'package:dae/core/constants/app_colors.dart';
 import 'package:dae/core/components/item_input_widget.dart';
 import 'package:dae/core/validation/input_validation.dart';
 import 'package:dae/features/home_screen/controller/home_controller.dart';
+import 'package:dae/features/home_screen/models/new_muslim_model.dart';
 import 'package:dae/features/home_screen/screens/widgets/normal_input_widget.dart';
 import 'package:flutter/material.dart';
 
 class DaeahWidget extends StatelessWidget {
   final bool isEdit;
-  const DaeahWidget({super.key, this.isEdit = false});
+  final NewMuslimModel? muslimData;
+  const DaeahWidget({super.key, this.isEdit = false, this.muslimData});
 
   @override
   Widget build(BuildContext context) {
-    final HomeController controller = HomeController.instance;
+    final controller = HomeController.instance;
     return Container(
       margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.all(15),
@@ -23,7 +25,7 @@ class DaeahWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Form(
-        key: controller.formState,
+        key: isEdit ? controller.editFormState : controller.formState,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           spacing: 10,
@@ -53,7 +55,7 @@ class DaeahWidget extends StatelessWidget {
                 ItemInputWidget(
                   text: 'الجنس',
                   items: controller.genderItems,
-                  value: controller.gender,
+                  value: isEdit ? muslimData!.gender : controller.gender,
                   onChange: (value) {
                     controller.gender = value!;
                   },
@@ -61,7 +63,7 @@ class DaeahWidget extends StatelessWidget {
                 ItemInputWidget(
                   text: 'الدول',
                   items: controller.countryItems,
-                  value: controller.country,
+                  value: isEdit ? muslimData!.country : controller.country,
                   onChange: (value) {
                     controller.country = value!;
                   },
@@ -172,7 +174,11 @@ class DaeahWidget extends StatelessWidget {
             ButtonWidget(
               text: 'إدخال',
               statusRequest: controller.statusRequest,
-              onPress: () async => await controller.enterNewMuslim(),
+              onPress:
+                  () async =>
+                      isEdit
+                          ? await controller.editMuslimInf(muslimData!.id)
+                          : await controller.enterNewMuslim(),
             ),
           ],
         ),

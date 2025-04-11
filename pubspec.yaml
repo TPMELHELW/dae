@@ -41,6 +41,8 @@ dependencies:
   cloud_firestore: ^5.6.6
   shared_preferences: ^2.5.3
   lottie: ^3.3.1
+  intl: ^0.20.2
+  liquid_pull_to_refresh: ^3.0.1
 
 dev_dependencies:
   flutter_test:
