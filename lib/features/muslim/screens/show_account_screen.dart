@@ -73,14 +73,14 @@ class ShowAccountScreen extends StatelessWidget {
                   },
                 ),
                 SizedBox(height: 15),
-                // !isDaea
-                // ?
-                ButtonWidget(
-                  text: 'اضافة تقدم',
-                  onPress:
-                      () => showAddProgressDialog(muslimData.id!, controller),
-                ),
-                // : SizedBox(),
+                !isDaea
+                    ? ButtonWidget(
+                      text: 'اضافة تقدم',
+                      onPress:
+                          () =>
+                              showAddProgressDialog(muslimData.id!, controller),
+                    )
+                    : SizedBox(),
               ],
             ),
           ),

@@ -15,7 +15,6 @@ class LessonLearnedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //  MuslimsController.instance;
     return GetBuilder<MuslimsController>(
       init: MuslimsController.instance,
       builder:
