@@ -7,11 +7,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class AuthRepository extends GetxController {
-  final _auth = FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance;
 
   Future<UserCredential> signUpWithEmail(String email, String password) async {
     try {
-      final credential = await _auth.createUserWithEmailAndPassword(
+      final credential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -25,16 +25,17 @@ class AuthRepository extends GetxController {
 
   Future<void> logOut() async {
     try {
-      await _auth.signOut();
+      await auth.signOut();
       Get.offAllNamed(AppRoutes.login);
+      // print(auth.currentUser?.uid);
     } catch (e) {
       rethrow;
     }
   }
 
   void redirectScreen() {
-    if (_auth.currentUser != null) {
-      if (!_auth.currentUser!.emailVerified) {
+    if (auth.currentUser != null) {
+      if (!auth.currentUser!.emailVerified) {
         Get.offAllNamed(AppRoutes.login);
       } else {
         Get.offAllNamed(AppRoutes.home);
@@ -46,7 +47,7 @@ class AuthRepository extends GetxController {
 
   Future<void> sendEmailVerification() async {
     try {
-      await _auth.currentUser!.sendEmailVerification();
+      await auth.currentUser!.sendEmailVerification();
     } catch (e) {
       rethrow;
     }
@@ -57,14 +58,14 @@ class AuthRepository extends GetxController {
     String password,
   ) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-      if (_auth.currentUser!.emailVerified) {
+      await auth.signInWithEmailAndPassword(email: email, password: password);
+      if (auth.currentUser!.emailVerified) {
         final db =
             await FirebaseFirestore.instance
                 .collection('Users')
-                .doc(_auth.currentUser!.uid)
+                .doc(auth.currentUser!.uid)
                 .get();
-
+        log('${auth.currentUser?.uid}');
         return db;
       } else {
         throw ('الرجاء تفعيل الايميل');
@@ -76,7 +77,7 @@ class AuthRepository extends GetxController {
 
   Future<void> forgetPassword(String email) async {
     try {
-      await _auth.sendPasswordResetEmail(email: email);
+      await auth.sendPasswordResetEmail(email: email);
     } catch (e) {
       rethrow;
     }

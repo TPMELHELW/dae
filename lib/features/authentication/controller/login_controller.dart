@@ -37,6 +37,7 @@ class LoginController extends GetxController {
         email.text.trim(),
         password.text.trim(),
       );
+      print(cred.data());
       _prefsService.setString('UserData', json.encode(cred.data()));
       statusRequest.value = StatusRequest.success;
       update();

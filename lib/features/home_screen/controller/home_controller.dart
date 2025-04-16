@@ -107,6 +107,7 @@ class HomeController extends GetxController {
         typeOfMuslim: typeOfMuslim,
         lastUpdate: stringDate,
         lessons: [],
+        moalemId: '',
       );
 
       await _homeRepository.enterNewMuslim(newMuslimData);

@@ -2,6 +2,7 @@ import 'package:dae/core/routes/app_pages.dart';
 import 'package:dae/core/services/shared_preferences_services.dart';
 import 'package:dae/core/theme/theme.dart';
 import 'package:dae/firebase_options.dart';
+import 'package:dae/intial_binding.dart';
 import 'package:dae/loading_screen.dart';
 import 'package:dae/repository/auth_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,8 +23,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthRepository authRepository = Get.find<AuthRepository>();
     return GetMaterialApp(
-      // initialBinding: ,
+      initialBinding:
+          authRepository.auth.currentUser != null ? InitialBinding() : null,
       debugShowCheckedModeBanner: false,
       locale: Locale('ar'),
       getPages: AppPages.appPages,

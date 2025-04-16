@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final NavigationController controller = NavigationController.instance;
-    final HomeController homeController = Get.put(HomeController());
+    final HomeController homeController = HomeController.instance;
     return LiquidPullToRefresh(
       onRefresh: () {
         homeController.getNextPrayerInfo(homeController.prayerTimes.value!);

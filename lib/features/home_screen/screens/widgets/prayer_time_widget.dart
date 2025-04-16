@@ -1,6 +1,7 @@
 import 'package:dae/core/components/handle_loading_widget.dart';
 import 'package:dae/core/constants/app_colors.dart';
 import 'package:dae/features/home_screen/controller/home_controller.dart';
+import 'package:dae/features/home_screen/screens/widgets/all_prayers_time_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -71,7 +72,10 @@ class PrayerTimeWidget extends StatelessWidget {
                         ],
                       ),
                       TextButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.isExpanded.value =
+                              !controller.isExpanded.value;
+                        },
                         style: TextButton.styleFrom(iconColor: AppColors.grey),
                         label: Text(
                           'عرض المواعيد',
@@ -79,6 +83,14 @@ class PrayerTimeWidget extends StatelessWidget {
                               .copyWith(color: AppColors.grey),
                         ),
                         icon: const Icon(CupertinoIcons.arrow_turn_down_right),
+                      ),
+                      AnimatedSize(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                        child:
+                            controller.isExpanded.value
+                                ? AllPrayersTimeWidget(controller: controller)
+                                : const SizedBox(),
                       ),
                     ],
                   ),

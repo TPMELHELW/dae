@@ -26,16 +26,27 @@ class MuslimsController extends GetxController {
   late Rx<StatusRequest> statusRequest;
   List<NewMuslimModel> muslimsData = <NewMuslimModel>[].obs;
 
-  Stream<List<NewMuslimModel>> get getMuslimsData {
+  Stream<List<NewMuslimModel>> getMuslimsData() async* {
     statusRequest.value = StatusRequest.loading;
-    final data = homeRepository.fetchMuslimsData().map((snapshot) {
+
+    if (navigationController.userData.value == null) {
+      await navigationController.loadUserData();
+    }
+
+    // if (navigationController.userData.value == null) {
+    //   statusRequest.value = StatusRequest.serverFailure;
+    //   yield [];
+    //   return;
+    // }
+
+    final bool isDaea = navigationController.userData.value!.isDaea;
+    yield* homeRepository.fetchMuslimsDataDaeah(isDaea).map((snapshot) {
       final mm =
           snapshot.docs.map((doc) => NewMuslimModel.fromSnapshot(doc)).toList();
       muslimsData = mm;
+      statusRequest.value = StatusRequest.success;
       return mm;
     });
-    statusRequest.value = StatusRequest.success;
-    return data;
   }
 
   void setValues(NewMuslimModel muslimData) {
@@ -76,7 +87,7 @@ class MuslimsController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     statusRequest = StatusRequest.init.obs;
     level = levelItems[0];
     status = statusItems[0];

@@ -36,4 +36,9 @@ class SharedPreferencesService {
     final SharedPreferences prefs = await _prefs;
     prefs.remove(key);
   }
+
+  Future<void> clearAll() async {
+    final SharedPreferences prefs = await _prefs;
+    prefs.clear();
+  }
 }

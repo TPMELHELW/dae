@@ -17,7 +17,7 @@ class MuslimGridWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final MuslimsController controller = MuslimsController.instance;
     return StreamBuilder<List<NewMuslimModel>>(
-      stream: controller.getMuslimsData,
+      stream: controller.getMuslimsData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Lottie.asset('assets/animation/loading.json');
@@ -26,9 +26,12 @@ class MuslimGridWidget extends StatelessWidget {
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
-
+        if (snapshot.data!.isEmpty) {
+          return Text('No Muslims');
+        }
         final data = snapshot.data ?? [];
-        // print(data[0].lessons);
+        print(data[0].active);
+
         return GridView.builder(
           padding: EdgeInsets.only(bottom: 10),
           physics: NeverScrollableScrollPhysics(),

@@ -17,16 +17,19 @@ class HandleLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    switch (statusRequest.value) {
-      case StatusRequest.loading:
-        return Lottie.asset('assets/animation/loading.json', height: height);
-      case StatusRequest.success:
-        return widget;
-      case StatusRequest.serverFailure:
-      case StatusRequest.offline:
-        return Center(child: Text('Error loading data'));
-      default:
-        return const SizedBox();
-    }
+    return Obx(() {
+      switch (statusRequest.value) {
+        case StatusRequest.loading:
+          return Lottie.asset('assets/animation/loading.json', height: height);
+        case StatusRequest.success:
+          return widget;
+        case StatusRequest.serverFailure:
+          return Text('dddd');
+        case StatusRequest.offline:
+          return Center(child: Text('Error loading data'));
+        default:
+          return const Text('dddd');
+      }
+    });
   }
 }

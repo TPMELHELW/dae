@@ -2,16 +2,13 @@ import 'package:dae/core/components/custom_divider_widget.dart';
 import 'package:dae/core/constants/app_colors.dart';
 import 'package:dae/features/muslim/screens/widgets/muslim_grid_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../controller/muslims_controller.dart';
 
 class MuslimScreen extends StatelessWidget {
   const MuslimScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final MuslimsController controller = Get.put(MuslimsController());
+    // Get.put(MuslimsController());
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 10).copyWith(top: 15),
 

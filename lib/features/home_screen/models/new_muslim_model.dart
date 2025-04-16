@@ -4,6 +4,7 @@ import 'package:dae/features/muslim/models/lessons_model.dart';
 class NewMuslimModel {
   final String? id;
   final String? daeaId;
+  final String? moalemId;
   final String gender;
   final String country;
   final String name;
@@ -20,6 +21,7 @@ class NewMuslimModel {
   final List<LessonsModel> lessons;
 
   NewMuslimModel({
+    this.moalemId,
     this.id,
     this.active = false,
     required this.lastUpdate,
@@ -55,6 +57,7 @@ class NewMuslimModel {
       'Way': way,
       'PreviousReligion': previousReligion,
       'TypeOfMuslim': typeOfMuslim,
+      'MoalemId': moalemId ?? '',
     };
   }
 
@@ -67,6 +70,7 @@ class NewMuslimModel {
       daeaId: data['DaeaId'],
       gender: data['Gender'],
       country: data['Country'],
+      active: data['Active'],
       name: data['Name'],
       age: data['Age'],
       period: data['Period'],
@@ -79,6 +83,7 @@ class NewMuslimModel {
       lastUpdate: data['LastUpdate'],
       lessons: lesson.map((item) => LessonsModel.fromSnapshot(item)).toList(),
       id: document.id,
+      moalemId: data['MoalemId'] ?? '',
     );
   }
 }

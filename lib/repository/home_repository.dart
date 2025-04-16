@@ -6,7 +6,17 @@ import 'package:get/get.dart';
 
 class HomeRepository extends GetxController {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
-  final currentUser = FirebaseAuth.instance.currentUser;
+  final auth = FirebaseAuth.instance;
+  Future<void> addMuslimToMoalem(String data) async {
+    try {
+      await _db.collection('Muslims').doc(data).update({
+        'Active': true,
+        'MoalemId': auth.currentUser!.uid,
+      });
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   Future<void> enterNewMuslim(NewMuslimModel muslimData) async {
     try {
@@ -18,7 +28,12 @@ class HomeRepository extends GetxController {
               .get();
 
       if (query.docs.isEmpty) {
-        await _db.collection('Muslims').add(muslimData.toJson());
+        final newData = await _db
+            .collection('Muslims')
+            .add(muslimData.toJson());
+        await _db.collection('Users').doc(auth.currentUser!.uid).update({
+          'Muslims': FieldValue.arrayUnion([newData.id]),
+        });
       } else {
         throw ('رقم المسلم موجود بالفعل');
       }
@@ -27,12 +42,18 @@ class HomeRepository extends GetxController {
     }
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> fetchMuslimsData() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchMuslimsDataDaeah(
+    bool isDaea,
+  ) {
     try {
+      print(auth.currentUser!.uid);
       final data =
           _db
               .collection('Muslims')
-              .where('DaeaId', isEqualTo: currentUser!.uid)
+              .where(
+                isDaea ? 'DaeaId' : 'MoalemId',
+                isEqualTo: auth.currentUser!.uid,
+              )
               .snapshots();
 
       return data;
@@ -44,6 +65,19 @@ class HomeRepository extends GetxController {
   Future<void> editMuslimInf(String docId, NewMuslimModel data) async {
     try {
       await _db.collection('Muslims').doc(docId).set(data.toJson());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getNonActiveMuslims() async {
+    try {
+      final data =
+          await _db
+              .collection('Muslims')
+              .where('MoalemId', isEqualTo: '')
+              .get();
+      return data;
     } catch (e) {
       rethrow;
     }
