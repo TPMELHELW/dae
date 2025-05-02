@@ -7,7 +7,7 @@ class UserModel {
   String number;
   String userName;
   bool isDaea;
-  String numberOfMuslims;
+  int numberOfMuslims;
   List muslims;
 
   UserModel({
@@ -37,7 +37,7 @@ class UserModel {
     number: '',
     isDaea: false,
     userName: '',
-    numberOfMuslims: '',
+    numberOfMuslims: 0,
     muslims: [],
   );
 
@@ -51,7 +51,7 @@ class UserModel {
       number: data['PhoneNumber'] ?? '',
       isDaea: data['isDaea'],
       userName: data['UserName'],
-      numberOfMuslims: data['NumberOfMuslims'] ?? '0',
+      numberOfMuslims: data['NumberOfMuslims'] ?? 0,
       muslims: data['Muslims'] ?? [],
     );
   }

@@ -32,13 +32,20 @@ class AccountSettingsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'محمد محسن',
+                    controller.navigationController.userData.value!.userName,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   // ActiveWidget(),
                 ],
               ),
-              ButtonWidget(text: 'تعديل الحساب'),
+              ButtonWidget(
+                text: 'تعديل الحساب',
+                onPress: () {
+                  print(
+                    controller.navigationController.userData.value!.muslims,
+                  );
+                },
+              ),
               Container(
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
@@ -53,13 +60,20 @@ class AccountSettingsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('عدد المسلمين الدي ادخلتهم'),
-                        Text(
-                          '45',
-                          style: Theme.of(
-                            context,
-                          ).textTheme.titleLarge!.copyWith(
-                            color: AppColors.kPrimaryColor,
-                            fontSize: 30,
+                        Obx(
+                          () => Text(
+                            controller
+                                .navigationController
+                                .userData
+                                .value!
+                                .numberOfMuslims
+                                .toString(),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleLarge!.copyWith(
+                              color: AppColors.kPrimaryColor,
+                              fontSize: 30,
+                            ),
                           ),
                         ),
                       ],
@@ -72,6 +86,43 @@ class AccountSettingsScreen extends StatelessWidget {
                 statusRequest: controller.statusRequest,
                 onPress: () => controller.signOut(),
               ),
+              // ListTile(
+              //   onTap: () {
+              //     Get.dialog(
+              //       Dialog(
+              //         insetPadding: EdgeInsets.symmetric(
+              //           horizontal: 20,
+              //           vertical: 40,
+              //         ),
+
+              //         child: ConstrainedBox(
+              //           constraints: BoxConstraints(
+              //             minWidth: Get.width * 0.8,
+              //             maxWidth: Get.width * 0.9,
+              //           ),
+
+              //           child: Column(
+              //             mainAxisSize: MainAxisSize.min,
+              //             crossAxisAlignment: CrossAxisAlignment.center,
+              //             children: [
+              //               Text(
+              //                 'Mahmoud Elhelw',
+              //                 style: Theme.of(
+              //                   context,
+              //                 ).textTheme.headlineLarge!.copyWith(
+              //                   color: AppColors.dark,
+              //                   fontSize: 30,
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       ),
+              //     );
+              //   },
+              //   leading: Icon(Iconsax.profile_2user),
+              //   title: Text('Developers Information'),
+              // ),
             ],
           ),
         ),

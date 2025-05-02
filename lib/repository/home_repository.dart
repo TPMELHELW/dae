@@ -33,6 +33,7 @@ class HomeRepository extends GetxController {
             .add(muslimData.toJson());
         await _db.collection('Users').doc(auth.currentUser!.uid).update({
           'Muslims': FieldValue.arrayUnion([newData.id]),
+          'NumberOfMuslims': FieldValue.increment(1),
         });
       } else {
         throw ('رقم المسلم موجود بالفعل');

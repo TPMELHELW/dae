@@ -7,6 +7,7 @@ import 'package:dae/features/home_screen/controller/home_controller.dart';
 import 'package:dae/features/home_screen/models/new_muslim_model.dart';
 import 'package:dae/features/home_screen/screens/widgets/normal_input_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DaeahWidget extends StatelessWidget {
   final bool isEdit;
@@ -133,15 +134,21 @@ class DaeahWidget extends StatelessWidget {
                 ItemInputWidget(
                   text: 'وسيلة الدعوة',
                   items: controller.wayItems,
-                  value: controller.way,
+                  value: controller.way.value,
                   onChange: (value) {
-                    controller.way = value!;
+                    controller.way.value = value!;
                   },
                 ),
-                ItemInputWidget(
-                  text: 'Page',
-                  items: ['Page 1', 'Page 2'],
-                  value: 'Page 1',
+                Obx(
+                  () => ItemInputWidget(
+                    text: 'Page',
+                    items: ['Page 1', 'Page 2'],
+                    value: 'Page 1',
+                    onChange:
+                        controller.way.value == controller.wayItems[0]
+                            ? null
+                            : (value) {},
+                  ),
                 ),
               ],
             ),

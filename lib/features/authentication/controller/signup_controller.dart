@@ -44,7 +44,7 @@ class SignupController extends GetxController {
         number: phoneNumber.text.trim(),
         isDaea: alsafa == items[1],
         userName: name.text.trim(),
-        numberOfMuslims: '0',
+        numberOfMuslims: 0,
         muslims: [],
       );
 

@@ -4,7 +4,6 @@ import 'package:dae/features/home_screen/controller/navigation_controller.dart';
 import 'package:dae/features/home_screen/screens/widgets/daeah_widget.dart';
 import 'package:dae/features/home_screen/screens/widgets/moalem_widget.dart';
 import 'package:dae/features/home_screen/screens/widgets/prayer_time_widget.dart';
-import 'package:dae/features/home_screen/screens/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -31,8 +30,6 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             PrayerTimeWidget(),
-            SizedBox(height: 20),
-            SearchWidget(),
             Obx(
               () =>
                   controller.userData.value?.isDaea == null

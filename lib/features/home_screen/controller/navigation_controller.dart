@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dae/core/constants/app_enum.dart';
 import 'package:dae/core/services/shared_preferences_services.dart';
@@ -15,7 +16,7 @@ class NavigationController extends GetxController {
   final Rx<int> currentIndex = 0.obs;
   late Rx<StatusRequest> statusRequest;
   final Rx<UserModel?> userData = Rx<UserModel?>(null);
-  final SharedPreferencesService _prefsService =
+  final SharedPreferencesService prefsService =
       Get.find<SharedPreferencesService>();
 
   final List<Widget> screens = const [
@@ -31,7 +32,8 @@ class NavigationController extends GetxController {
   Future<void> loadUserData() async {
     try {
       statusRequest.value = StatusRequest.loading;
-      final userString = await _prefsService.getString('UserData');
+      final userString = await prefsService.getString('UserData');
+      log(userString!);
       if (userString != null) {
         userData.value = UserModel.fromStorage(await json.decode(userString));
         statusRequest.value = StatusRequest.success;

@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dae/core/constants/app_enum.dart';
 import 'package:dae/core/functions/check_internet.dart';
@@ -38,7 +40,8 @@ class HomeController extends GetxController {
 
   var prayerTimes = Rxn<PrayerTimeModel>();
   bool isEdit = false;
-  late String gender, period, country, way, previousReligion, typeOfMuslim;
+  late String gender, period, country, previousReligion, typeOfMuslim;
+  late Rx<String> way;
   Map<String, dynamic> nextPrayerInfo = {};
   GlobalKey<FormState> formState = GlobalKey<FormState>();
   GlobalKey<FormState> editFormState = GlobalKey<FormState>();
@@ -102,7 +105,7 @@ class HomeController extends GetxController {
         number: number.text.trim(),
         email: email.text.trim(),
         primaryLang: primaryLang.text.trim(),
-        way: way,
+        way: way.value,
         previousReligion: previousReligion,
         typeOfMuslim: typeOfMuslim,
         lastUpdate: stringDate,
@@ -111,6 +114,12 @@ class HomeController extends GetxController {
       );
 
       await _homeRepository.enterNewMuslim(newMuslimData);
+      controller.userData.value!.numberOfMuslims++;
+      await controller.prefsService.setString(
+        'UserData',
+        json.encode(controller.userData.value!.toJson()),
+      );
+      log((await controller.prefsService.getString('UserData'))!);
       statusRequest.value = StatusRequest.success;
       clearAllFields();
       showSuccessSnackbar('Success', 'تم اضافه المسلم بنجاح');
@@ -193,7 +202,7 @@ class HomeController extends GetxController {
         number: number.text.trim(),
         email: email.text.trim(),
         primaryLang: primaryLang.text.trim(),
-        way: way,
+        way: way.value,
         previousReligion: previousReligion,
         typeOfMuslim: typeOfMuslim,
         lastUpdate: stringDate,
@@ -225,7 +234,7 @@ class HomeController extends GetxController {
     gender = genderItems[0];
     period = periodItems[0];
     country = countryItems[0];
-    way = wayItems[0];
+    way = wayItems[0].obs;
     previousReligion = previousReligionItems[0];
     typeOfMuslim = typeOfMuslimItems[0];
     // getNextPrayerInfo(prayerTimes.value!);
