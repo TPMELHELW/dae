@@ -41,7 +41,7 @@ class MuslimGridWidget extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            mainAxisExtent: MediaQuery.of(context).size.height * 0.3,
+            mainAxisExtent: MediaQuery.of(context).size.height * 0.32,
           ),
           itemBuilder: (context, index) {
             return Container(
