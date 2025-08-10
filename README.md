@@ -37,3 +37,14 @@
   <img src="assets/screenshots/5.jpg" width="200" alt="Settings Screens">
   
 </div>
+
+
+---
+
+## 📥 Download APK
+
+Install the app on Android:  
+📱 **[Download APK](https://drive.google.com/file/d/1PVdENQMZXSImiEoDosCAlppOaGRFm7xa/view?usp=drive_link)**
+
+---
+
